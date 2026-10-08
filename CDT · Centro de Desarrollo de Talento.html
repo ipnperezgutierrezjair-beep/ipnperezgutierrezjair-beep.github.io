@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>CDT · Centro de Desarrollo de Talento</title>
+<style>
+:root{--bg:#F9F5EC;--card:#FEFCF7;--ink:#111;--mut:#6b6253;--line:#e6dcc6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--ink);font:15px/1.5 "Helvetica Neue",Arial,sans-serif;min-height:100vh}
+h1,h2,h3,.brand,.mono{font-family:Georgia,"Times New Roman",serif;font-weight:400;margin:0}h2{font-size:30px;margin-bottom:18px}h3{font-size:19px;margin-bottom:6px}
+.mut{color:var(--mut)}small{font-size:12px}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:14px 22px;background:var(--bg);border-bottom:1px solid var(--line)}
+.brand{font-size:22px;letter-spacing:.2em}.who{margin-left:auto;font-size:13px;color:var(--mut)}
+.ham{background:none;border:1px solid var(--ink);width:38px;height:38px;border-radius:6px;font-size:18px;cursor:pointer;transition:.25s}.ham:hover{background:var(--ink);color:var(--bg)}
+nav{position:fixed;z-index:9;top:0;left:0;bottom:0;width:260px;background:var(--card);border-right:1px solid var(--line);padding:70px 0 20px;transform:translateX(-100%);transition:transform .38s cubic-bezier(.2,.8,.2,1);box-shadow:none;overflow:auto}
+nav.on{transform:none;box-shadow:12px 0 40px #0003}nav a{display:block;padding:13px 28px;cursor:pointer;border-left:3px solid transparent;transition:.25s}nav a:hover{background:#0000000a;padding-left:34px}nav a.act{border-left-color:#B8912F;font-weight:600}nav a.out{margin-top:20px;border-top:1px solid var(--line);color:var(--mut)}
+.scrim{position:fixed;inset:0;background:#0005;opacity:0;pointer-events:none;transition:.35s;z-index:8}.scrim.on{opacity:1;pointer-events:auto}
+main{max-width:1050px;margin:0 auto;padding:28px 22px 60px}
+.fade{animation:up .5s cubic-bezier(.2,.8,.2,1)}@keyframes up{from{opacity:0;transform:translateY(12px)}}@keyframes pop{from{opacity:0;transform:scale(.96)}}
+.btn{background:linear-gradient(135deg,#C49C36,#9A7620);color:#fff;border:0;padding:10px 20px;border-radius:6px;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:.25s;font-size:14px;margin:2px}.btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px #a8822a55}
+.btn.gh{background:none;color:var(--ink);border:1px solid var(--ink)}.btn.gh:hover{box-shadow:none;background:#0000000d}.btn.dk{background:var(--ink);color:#E3C25F}.btn.sm{padding:5px 12px;font-size:12px}
+.bar{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:26px}.st{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;transition:.3s}.st:hover{transform:translateY(-3px);box-shadow:0 10px 24px #0000001a}.st b{display:block;font:400 32px Georgia,serif}.st span{color:var(--mut);font-size:13px}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;transition:.3s}.card:hover{box-shadow:0 8px 22px #0000001a}.card.big{padding:30px}.card.ok{border-color:#B8912F;border-width:2px}.card.no{border-color:#111}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}tr:last-child td{border:0}
+.bd{display:inline-block;padding:2px 10px;border-radius:20px;border:1px solid var(--ink);font-size:12px}.bd.ok{background:#E3C25F;border-color:#B8912F}.bd.no{background:var(--ink);color:#E3C25F}
+.rw{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--line);flex-wrap:wrap}.sc{width:70px}
+.bars div{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px}.bars i{display:block;height:10px;background:linear-gradient(90deg,#B8912F,#E3C25F);border-radius:5px;transition:width .8s}
+.danger{margin-top:36px;border:1px dashed var(--ink);border-radius:10px;padding:20px}
+label{display:block;font-size:12px;letter-spacing:.05em;color:var(--mut);margin:10px 0}input,select,textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;background:#fffaf0;border:1px solid var(--line);border-radius:6px;font:inherit;color:var(--ink);transition:.2s}input:focus,select:focus,textarea:focus{outline:0;border-color:#B8912F;box-shadow:0 0 0 3px #b8912f33}
+.ck{display:flex;align-items:center;gap:8px;margin:4px 0;color:var(--ink);font-size:14px}.ck input{width:auto;margin:0}
+.ov{position:fixed;inset:0;background:#000a;z-index:20;display:flex;align-items:center;justify-content:center;padding:16px;animation:up .25s}.md{background:var(--bg);border-radius:12px;padding:28px;width:100%;max-width:640px;max-height:90vh;overflow:auto;animation:pop .3s cubic-bezier(.2,.8,.2,1)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}@media(max-width:560px){.g2{grid-template-columns:1fr}.who{display:none}}
+.acts{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;flex-wrap:wrap}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.lc{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:40px 34px;text-align:center;animation:up .7s cubic-bezier(.2,.8,.2,1);box-shadow:0 20px 50px #0000001f}.lc .btn{width:100%;margin-top:14px;padding:12px}.lc label{text-align:left}.lc h1{font-size:22px;margin:8px 0 4px}.mono{font-size:46px;letter-spacing:.3em;margin-right:-.3em}
+.lnk{display:block;margin-top:16px;font-size:13px;color:var(--mut);cursor:pointer;text-decoration:underline}
+.wm{position:relative;user-select:none;-webkit-user-select:none;white-space:pre-wrap}.wm::after{content:attr(data-w);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;color:#0000000d;transform:rotate(-20deg);pointer-events:none;text-align:center}.wm img{max-width:100%;pointer-events:none}.wm iframe{width:100%;height:55vh;border:1px solid var(--line)}
+.toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:var(--ink);color:#E3C25F;padding:12px 22px;border-radius:30px;z-index:50;animation:up .3s;font-size:14px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9);
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const RN={DG:'Dirección General',GG:'Gerente General',GA:'Gerente de Área',JA:'Jefe de Área',PE:'Personal'},ACC_MIN=80,K='cdt_v1';
+let S=null,me=null,view='resumen',menu=false,DB=null;
+function seed(){S={users:[{id:'DG001',nombre:'Dirección',apellido:'General',pass:'admin123',area:'Dirección',puesto:'Director General',ingreso:'2020-01-01',rol:'DG',superior:'',activo:true}],areas:['Dirección','Operaciones','Recursos Humanos'],puestos:['Director General','Gerente General','Gerente de Área','Jefe de Área','Analista'],mats:[],evals:[],reqs:[],acc:{},log:[]}}
+const save=()=>{if(!S)return;S.log=S.log.slice(0,150);if(DB){const{mats,...core}=S;DB.doc('cdt/core').set(core).catch(()=>toast('No se pudo guardar. Necesitas permiso de colaborador.'))}else try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast('Almacenamiento lleno')}};
+async function boot(){try{DB=await claude.use('db')}catch(e){}
+if(!DB){try{S=JSON.parse(localStorage.getItem(K))}catch(e){}if(!S)seed();return render()}
+DB.doc('cdt/core').onSnapshot(d=>{const m=S?S.mats:[];if(d.exists)S={...d.data(),mats:m};else if(!S){seed();S.mats=m}sync()},()=>toast('Error de conexión'));
+DB.collection('mats').onSnapshot(q=>{if(!S)seed();S.mats=q.docs.map(d=>d.data()).sort((a,b)=>b.fecha-a.fecha);sync()},()=>{})}
+function sync(){if(!S)return;if(!me&&$('#lu'))return;if(me){const u=U(me.id);if(!u||!u.activo){me=null;toast('Tu acceso fue desactivado')}else me=u;if(me&&($('#mod')||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)))return}render()}
+const U=id=>S.users.find(u=>u.id===id),nm=u=>u?u.nombre+' '+u.apellido:'—';
+const isTop=()=>['DG','GG'].includes(me.rol),mgr=()=>['DG','GG','GA'].includes(me.rol);
+const scope=()=>isTop()?S.users:me.rol==='PE'?S.users.filter(u=>u.id===me.id):S.users.filter(u=>u.area===me.area);
+const inScope=id=>scope().some(u=>u.id===id);
+const logp=txt=>{S.log.unshift({t:Date.now(),q:me.id,a:me.area,txt});save()};
+const fd=t=>new Date(t).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'});
+const elig=u=>Date.now()-new Date(u.ingreso)>=365*864e5;
+const opt=(l,s)=>l.map(x=>`<option ${x===s?'selected':''}>${esc(x)}</option>`).join('');
+const st=(v,l)=>`<div class="st"><b>${v}</b><span>${l}</span></div>`;
+const pend=()=>S.reqs.filter(r=>r.para===me.id&&r.estado==='abierta').length;
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
+function modal(h){closeM();const m=document.createElement('div');m.className='ov';m.id='mod';m.innerHTML=`<div class="md">${h}</div>`;m.onclick=e=>{if(e.target===m)closeM()};document.body.appendChild(m)}
+const closeM=()=>{const m=$('#mod');if(m)m.remove()};
+const pwf=()=>mgr()?`<label>Confirma tu contraseña<input type="password" id="pw" autocomplete="off"></label>`:'';
+const pwok=()=>{if(mgr()&&$('#pw').value!==me.pass){toast('Contraseña incorrecta');return false}return true};
+const asList=()=>S.users.filter(u=>u.activo).map(u=>`<label class="ck"><input type="checkbox" class="as" value="${u.id}">${esc(nm(u))} <small class="mut">· ${esc(u.area)}</small></label>`).join('');
+const picked=()=>[...document.querySelectorAll('.as:checked')].map(x=>x.value);
+
+/* Sesión */
+const loginView=()=>`<div class="login"><div class="lc"><div class="mono">CDT</div><h1>Centro de Desarrollo de Talento</h1><p class="mut" style="margin:0 0 14px">Ingresa con tu clave de usuario</p><label>Clave de usuario o nombre completo<input id="lu" autocomplete="username"></label><label>Contraseña<input id="lp" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')login()"></label><button class="btn" onclick="login()">Ingresar</button><a class="lnk" onclick="forgot()">Olvidé mi contraseña</a>${DB?'':'<small class="mut" style="display:block;margin-top:14px">Modo local: los datos no se comparten</small>'}</div></div>`;
+function findU(q){q=q.trim().toLowerCase();const x=U(q)||S.users.find(u=>u.id.toLowerCase()===q);if(x)return x;const m=S.users.filter(u=>nm(u).toLowerCase()===q);return m.length===1?m[0]:null}
+function login(){const u=findU($('#lu').value);if(!u||u.pass!==$('#lp').value)return toast('Clave o contraseña incorrecta');if(!u.activo)return toast('Acceso desactivado. Contacta a Dirección.');me=u;view='resumen';menu=false;logp('Inicio de sesión');render()}
+function logout(){me=null;menu=false;render()}
+function forgot(){modal(`<h3>Restablecer contraseña</h3><p class="mut">Se enviará una solicitud a tu superior inmediato.</p><label>Clave de usuario<input id="fu"></label><div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="sendForgot()">Enviar solicitud</button></div>`)}
+function sendForgot(){const u=findU($('#fu').value);if(u&&u.activo){const s=U(u.superior),p=s&&s.activo?s.id:S.users.find(x=>x.rol==='DG'&&x.activo)?.id;S.reqs.unshift({id:uid(),tipo:'pass',de:u.id,para:p,texto:'Solicita restablecer su contraseña',estado:'abierta',fecha:Date.now()});S.log.unshift({t:Date.now(),q:u.id,a:u.area,txt:'Solicitó restablecer contraseña'});save()}closeM();toast('Si la clave existe, la solicitud fue enviada')}
+
+/* Shell */
+const MENU=()=>{const m=[['resumen','Resumen'],['empleados','Empleados'],['material','Material'],['evaluaciones','Evaluaciones'],['acreditaciones','Acreditaciones']];if(mgr())m.push(['solicitudes','Solicitudes'+(pend()?` (${pend()})`:'')],['historial','Historial']);return m};
+function render(){const a=$('#app');if(!S){a.innerHTML='<div class="login"><p class="mut">Cargando…</p></div>';return}if(!me){a.innerHTML=loginView();return}
+a.innerHTML=`<header><button class="ham" onclick="tm()" aria-label="Menú">☰</button><span class="brand">CDT</span><span class="who">${esc(nm(me))} · ${RN[me.rol]}</span></header><div class="scrim ${menu?'on':''}" onclick="tm()"></div><nav class="${menu?'on':''}">${MENU().map(([k,l])=>`<a class="${k===view?'act':''}" onclick="go('${k}')">${l}</a>`).join('')}<a class="out" onclick="logout()">Cerrar sesión</a></nav><main class="fade">${V[view]()}</main>`}
+function tm(){menu=!menu;$('nav').classList.toggle('on',menu);$('.scrim').classList.toggle('on',menu)}
+function go(k){view=k;menu=false;render()}
+
+const V={
+resumen(){const us=scope(),act=us.filter(u=>u.activo),ac=us.filter(u=>S.acc[u.id]?.ok).length,ap=act.filter(elig).length;let h='<h2>Resumen</h2>';
+if(me.rol==='PE'){const mm=S.mats.filter(m=>m.asig.includes(me.id)).length,pe=S.evals.filter(e=>e.asig.includes(me.id)&&e.res[me.id]==null).length,a=S.acc[me.id];
+h+=`<div class="grid">${st(mm,'Materiales asignados')}${st(pe,'Evaluaciones pendientes')}${st(a?(a.ok?'Acreditado':'No aprobada'):elig(me)?'En espera':'No apto','Estado de acreditación')}</div>`}
+else{const sc=[];S.evals.forEach(e=>Object.entries(e.res).forEach(([u,r])=>{if(act.some(x=>x.id===u))sc.push(r)}));const av=sc.length?Math.round(sc.reduce((a,b)=>a+b,0)/sc.length):'—';
+h+=`<div class="grid">${st(act.length,'Personas activas')}${mgr()?st(us.length-act.length,'Personas dadas de baja'):''}${st(ac,'Personas acreditadas')}${st(ap,'Aptas por antigüedad')}${st(av,'Promedio de evaluaciones')}</div>`;
+if(isTop()){const by={};act.forEach(u=>by[u.area]=(by[u.area]||0)+1);const mx=Math.max(1,...Object.values(by));h+=`<h3>Personas por área</h3><div class="bars">${Object.entries(by).map(([a,n])=>`<div><span style="width:150px">${esc(a)}</span><i style="width:${n/mx*60}%"></i><b>${n}</b></div>`).join('')}</div>`}}
+if(me.rol==='DG')h+=`<div class="danger"><h3>Zona de riesgo</h3><p class="mut">Elimina todos los empleados, materiales, evaluaciones, solicitudes e historial. Solo se conserva tu cuenta.</p><button class="btn dk" onclick="wipeF()">Borrar todos los datos</button></div>`;
+return h},
+
+empleados(){const us=scope();return `<div class="bar"><h2>Empleados</h2>${isTop()?'<div><button class="btn gh" onclick="listF()">Áreas y puestos</button><button class="btn" onclick="uform()">Nuevo empleado</button></div>':''}</div><div class="tw"><table><tr><th>ID</th><th>Nombre</th><th>Área</th><th>Puesto</th><th>Ingreso</th><th>Permisos</th><th>Estado</th>${isTop()?'<th></th>':''}</tr>${us.map(u=>`<tr><td>${esc(u.id)}</td><td>${esc(nm(u))}</td><td>${esc(u.area)}</td><td>${esc(u.puesto)}</td><td>${u.ingreso}</td><td>${RN[u.rol]}</td><td>${u.activo?'<span class="bd ok">Activo</span>':`<span class="bd no" title="${esc(u.baja?.razon)}">Baja · ${esc(u.baja?.razon)}</span>`}</td>${isTop()?`<td>${me.rol==='GG'&&u.rol==='DG'?'':`<button class="btn gh sm" onclick="uform('${u.id}')">Editar</button>`+(u.id===me.id?'':u.activo?`<button class="btn sm" onclick="bajaF('${u.id}')">Dar de baja</button>`:`<button class="btn sm" onclick="reactF('${u.id}')">Reactivar</button>`)}</td>`:''}</tr>`).join('')}</table></div>`},
+
+material(){const ms=S.mats.filter(m=>isTop()||(me.rol==='GA'?m.asig.some(inScope):m.asig.includes(me.id)));
+return `<div class="bar"><h2>Material</h2><div><button class="btn gh" onclick="reqForm()">Solicitar capacitación</button>${isTop()?'<button class="btn" onclick="matForm()">Subir material</button>':''}</div></div>`+(ms.length?`<div class="list">${ms.map(m=>`<div class="card"><h3>${esc(m.titulo)}</h3><p class="mut" style="margin:0 0 8px">${esc((m.texto||'').slice(0,110))}</p><small class="mut">${esc(nm(U(m.by)))} · ${fd(m.fecha)} · ${m.asig.length} asignado(s)</small><div class="acts"><button class="btn" onclick="viewM('${m.id}')">Ver</button></div></div>`).join('')}</div>`:'<p class="mut">No hay material disponible para ti.</p>')},
+
+evaluaciones(){const es=S.evals.filter(e=>isTop()||e.asig.some(inScope));
+return `<div class="bar"><h2>Evaluaciones</h2>${isTop()?'<button class="btn" onclick="evalForm()">Nueva evaluación</button>':''}</div>`+(es.length?`<div class="list">${es.map(e=>`<div class="card"><h3>${esc(e.titulo)}</h3><p class="mut" style="margin:0 0 6px">${esc(e.desc)}</p><small>${e.min==null?'Sin puntaje mínimo':'Puntaje mínimo: '+e.min}</small>${e.asig.filter(inScope).map(u=>{const r=e.res[u];const b=r==null?'<span class="bd">Pendiente</span>':e.min==null?`<span class="bd">${r}</span>`:`<span class="bd ${r>=e.min?'ok':'no'}">${r} · ${r>=e.min?'Aprobada':'No aprobada'}</span>`;return `<div class="rw"><span>${esc(nm(U(u)))}</span><span>${mgr()?`<input class="sc" type="number" min="0" max="100" id="s_${e.id}_${u}" value="${r??''}" style="display:inline-block;width:70px"> <button class="btn sm" onclick="setR('${e.id}','${u}')">Registrar</button> `:''}${b}</span></div>`}).join('')}</div>`).join('')}</div>`:'<p class="mut">No hay evaluaciones asignadas.</p>')},
+
+acreditaciones(){const a=S.acc[me.id];let m,c='';
+if(a){m=a.ok?'Tu solicitud fue aprobada, el área correspondiente se pondrá en contacto contigo':'Por el momento tu acreditación no fue aprobada, acércate con tu superior';c=a.ok?'ok':'no'}else m=elig(me)?'Cumples la antigüedad requerida. Tu superior inmediato debe autorizar tu acreditación.':'No apto a acreditación';
+let h=`<h2>Acreditaciones</h2><div class="card big ${c}"><small class="mut">MI ESTADO</small><h3 style="font-size:22px;margin-top:6px">${m}</h3></div>`;
+if(mgr()){const c=scope().filter(u=>u.activo&&u.id!==me.id&&elig(u));h+=`<h3 style="margin:28px 0 12px">Personas listas por antigüedad</h3><div class="tw"><table><tr><th>Nombre</th><th>Área</th><th>Ingreso</th><th>Estado</th><th></th></tr>${c.length?c.map(u=>{const x=S.acc[u.id];return `<tr><td>${esc(nm(u))}</td><td>${esc(u.area)}</td><td>${u.ingreso}</td><td>${x?`<span class="bd ${x.ok?'ok':'no'}">${x.ok?'Acreditado':'No aprobada'} · ${x.score}</span>`:'<span class="bd">Lista por tiempo</span>'}</td><td>${x?.ok?'':u.superior===me.id?`<button class="btn sm" onclick="authF('${u.id}')">Autorizar</button>`:`<small class="mut">Autoriza: ${esc(nm(U(u.superior)))}</small>`}</td></tr>`}).join(''):'<tr><td colspan="5" class="mut">Nadie cumple la antigüedad aún.</td></tr>'}</table></div>`}
+return h},
+
+solicitudes(){const rs=S.reqs.filter(r=>r.para===me.id);const T={pass:'Contraseña',cap:'Capacitación'};
+return `<h2>Solicitudes</h2>`+(rs.length?`<div class="list">${rs.map(r=>`<div class="card" style="${r.estado!=='abierta'?'opacity:.55':''}"><small class="mut">${T[r.tipo]} · ${fd(r.fecha)}</small><h3>${esc(nm(U(r.de)))}</h3><p style="margin:0 0 6px">${r.titulo?`<b>${esc(r.titulo)}</b><br>`:''}${esc(r.texto)}</p><span class="bd ${r.estado==='abierta'?'':'ok'}">${r.estado==='abierta'?'Abierta':'Atendida'}</span>${r.estado==='abierta'?`<div class="acts">${r.tipo==='pass'?`<button class="btn" onclick="resetF('${r.id}')">Restablecer</button>`:`<button class="btn" onclick="closeR('${r.id}')">Marcar atendida</button>`}</div>`:''}</div>`).join('')}</div>`:'<p class="mut">No tienes solicitudes.</p>')},
+
+historial(){const l=S.log.filter(e=>isTop()||e.a===me.area).slice(0,300);return `<h2>Historial</h2><div class="tw"><table><tr><th>Fecha</th><th>Usuario</th><th>Registro</th></tr>${l.map(e=>`<tr><td>${fd(e.t)}</td><td>${esc(nm(U(e.q)))}</td><td style="white-space:normal">${esc(e.txt)}</td></tr>`).join('')}</table></div>`}
+};
+
+/* Empleados */
+function uform(id){const u=id?U(id):{},e=!!id,sup=S.users.filter(x=>x.activo&&['DG','GG','GA'].includes(x.rol)&&x.id!==u.id);
+modal(`<h3>${e?'Editar':'Nuevo'} empleado</h3><div class="g2"><label>Nombre<input id="f_n" value="${esc(u.nombre)}"></label><label>Apellido<input id="f_a" value="${esc(u.apellido)}"></label><label>ID de usuario (único)<input id="f_i" value="${esc(u.id)}" ${e?'disabled':''}></label><label>Contraseña<input id="f_p" placeholder="${e?'Vacío = sin cambios':''}"></label><label>Área<select id="f_ar">${opt(S.areas,u.area)}</select></label><label>Puesto<select id="f_pu">${opt(S.puestos,u.puesto)}</select></label><label>Fecha de ingreso<input id="f_f" type="date" value="${u.ingreso||new Date().toISOString().slice(0,10)}"></label><label>Permisos de la web<select id="f_r">${Object.entries(RN).filter(([k])=>me.rol==='DG'||k!=='DG').map(([k,v])=>`<option value="${k}" ${u.rol===k?'selected':''}>${v}</option>`).join('')}</select></label><label>Superior inmediato<select id="f_s"><option value="">— Ninguno —</option>${sup.map(x=>`<option value="${x.id}" ${u.superior===x.id?'selected':''}>${esc(nm(x))} (${RN[x.rol]})</option>`).join('')}</select></label></div>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="saveU(${e?`'${id}'`:'null'})">Guardar</button></div>`)}
+function saveU(old){if(!pwok())return;const v=i=>$('#'+i).value.trim(),id=old||v('f_i');
+if(!v('f_n')||!v('f_a')||!id)return toast('Completa nombre, apellido e ID');
+if(!/^[\w.-]+$/.test(id))return toast('ID: solo letras, números, . _ -');
+if(!old&&U(id))return toast('Ese ID ya existe');if(!old&&!v('f_p'))return toast('Define una contraseña');
+const d={nombre:v('f_n'),apellido:v('f_a'),area:v('f_ar'),puesto:v('f_pu'),ingreso:v('f_f'),rol:v('f_r'),superior:v('f_s')};
+if(old){const u=U(old);Object.assign(u,d);if(v('f_p'))u.pass=v('f_p');logp('Editó al empleado '+id)}else{S.users.push({id,pass:v('f_p'),activo:true,...d});logp('Agregó al empleado '+id+' ('+RN[d.rol]+')')}
+save();closeM();toast('Guardado');render()}
+function bajaF(id){modal(`<h3>Dar de baja a ${esc(nm(U(id)))}</h3><p class="mut">Perderá el acceso a la plataforma.</p><label>Motivo<select id="b_r"><option>Despido</option><option>Renuncia</option><option>Otro</option></select></label>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="baja('${id}')">Confirmar baja</button></div>`)}
+function baja(id){if(!pwok())return;const u=U(id),r=$('#b_r').value;u.activo=false;u.baja={razon:r,fecha:Date.now()};logp(`Dio de baja a ${id}: ${r}`);closeM();render()}
+function reactF(id){modal(`<h3>Reactivar a ${esc(nm(U(id)))}</h3>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="react('${id}')">Reactivar</button></div>`)}
+function react(id){if(!pwok())return;const u=U(id);u.activo=true;u.baja=null;logp('Reactivó a '+id);closeM();render()}
+function listF(){modal(`<h3>Áreas y puestos</h3><label>Nueva área<input id="l_a"></label><button class="btn sm" onclick="addL('areas','l_a')">Agregar área</button><label>Nuevo puesto<input id="l_p"></label><button class="btn sm" onclick="addL('puestos','l_p')">Agregar puesto</button><p class="mut"><b>Áreas:</b> ${S.areas.map(esc).join(', ')}<br><b>Puestos:</b> ${S.puestos.map(esc).join(', ')}</p><div class="acts"><button class="btn gh" onclick="closeM()">Cerrar</button></div>`)}
+function addL(k,i){const v=$('#'+i).value.trim();if(!v||S[k].includes(v))return toast('Valor vacío o repetido');S[k].push(v);logp(`Agregó a ${k}: ${v}`);listF()}
+
+/* Material */
+function matForm(){modal(`<h3>Subir material</h3><label>Título<input id="m_t"></label><label>Contenido<textarea id="m_x" rows="4"></textarea></label><label>Archivo (imagen o PDF, máx. 150 KB)<input id="m_f" type="file" accept="image/*,application/pdf"></label><label>Asignar a</label><div style="max-height:150px;overflow:auto">${asList()}</div>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="saveMat()">Subir</button></div>`)}
+function saveMat(){if(!pwok())return;const t=$('#m_t').value.trim(),asig=picked();if(!t)return toast('Falta el título');if(!asig.length)return toast('Asigna al menos una persona');
+const f=$('#m_f').files[0],fin=(file,mime)=>{const m={id:uid(),titulo:t,texto:$('#m_x').value,file,mime,asig,by:me.id,fecha:Date.now()};S.mats.unshift(m);if(DB)DB.doc('mats/'+m.id).set(m).catch(()=>toast('No se pudo subir el material'));logp('Subió material: '+t);closeM();toast('Material subido');render()};
+if(f){if(f.size>1.5e5)return toast('Archivo demasiado grande (máx. 150 KB)');const r=new FileReader();r.onload=()=>fin(r.result,f.type);r.readAsDataURL(f)}else fin(null,null)}
+function viewM(id){const m=S.mats.find(x=>x.id===id);let f='';if(m.file)f=m.mime.startsWith('image')?`<img src="${m.file}">`:`<iframe src="${m.file}#toolbar=0&navpanes=0"></iframe>`;
+logp('Consultó material: '+m.titulo);modal(`<h3>${esc(m.titulo)}</h3><small class="mut">Material confidencial · no descargable</small><div class="wm" data-w="${esc(nm(me))}" oncontextmenu="return false" style="margin-top:12px">${esc(m.texto)}${f}</div><div class="acts"><button class="btn" onclick="closeM()">Cerrar</button></div>`)}
+function reqForm(){modal(`<h3>Solicitar capacitación</h3><p class="mut">Se enviará a tu superior inmediato.</p><label>Nombre de la capacitación<input id="r_t"></label><label>Justificación<textarea id="r_x" rows="4"></textarea></label><div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="sendReq()">Enviar</button></div>`)}
+function sendReq(){const t=$('#r_t').value.trim(),x=$('#r_x').value.trim();if(!t||!x)return toast('Completa ambos campos');const s=U(me.superior),p=s&&s.activo?s.id:S.users.find(u=>u.rol==='DG'&&u.activo)?.id;S.reqs.unshift({id:uid(),tipo:'cap',de:me.id,para:p,titulo:t,texto:x,estado:'abierta',fecha:Date.now()});logp('Solicitó capacitación: '+t);closeM();toast('Solicitud enviada')}
+
+/* Evaluaciones */
+function evalForm(){modal(`<h3>Nueva evaluación</h3><label>Título<input id="e_t"></label><label>Descripción / material a evaluar<textarea id="e_d" rows="3"></textarea></label><label class="ck"><input type="checkbox" id="e_c" onchange="$('#e_m').disabled=!this.checked"> Definir puntaje mínimo</label><input id="e_m" type="number" min="0" max="100" value="70" disabled><label>Asignar a</label><div style="max-height:150px;overflow:auto">${asList()}</div>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="saveEval()">Crear</button></div>`)}
+function saveEval(){if(!pwok())return;const t=$('#e_t').value.trim(),asig=picked();if(!t||!asig.length)return toast('Título y asignados requeridos');S.evals.unshift({id:uid(),titulo:t,desc:$('#e_d').value,min:$('#e_c').checked?+$('#e_m').value:null,asig,res:{},by:me.id,fecha:Date.now()});logp('Creó evaluación: '+t);closeM();render()}
+function setR(e,u){const v=$(`#s_${e}_${u}`).value;if(v==='')return toast('Captura un puntaje');const ev=S.evals.find(x=>x.id===e);ev.res[u]=Math.max(0,Math.min(100,+v));logp(`Registró resultado de ${u} en "${ev.titulo}": ${ev.res[u]}`);render()}
+
+/* Acreditaciones */
+function authF(id){modal(`<h3>Autorizar acreditación</h3><p class="mut">${esc(nm(U(id)))} · puntaje mínimo: ${ACC_MIN}</p><label>Evaluación de acreditación (archivo)<input id="a_f" type="file"></label><label>Puntaje obtenido (0-100)<input id="a_s" type="number" min="0" max="100"></label>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="auth('${id}')">Registrar</button></div>`)}
+function auth(id){if(!pwok())return;const s=$('#a_s').value;if(s==='')return toast('Captura el puntaje');const n=+s;S.acc[id]={score:n,ok:n>=ACC_MIN,fecha:Date.now(),by:me.id,arch:$('#a_f').files[0]?.name||''};logp(`Autorizó acreditación de ${id}: ${n} (${n>=ACC_MIN?'aprobada':'no aprobada'})`);closeM();render()}
+
+/* Solicitudes */
+function resetF(id){modal(`<h3>Restablecer contraseña</h3><label>Nueva contraseña<input id="n_p"></label>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn" onclick="doReset('${id}')">Guardar</button></div>`)}
+function doReset(id){if(!pwok())return;const p=$('#n_p').value.trim();if(!p)return toast('Escribe la nueva contraseña');const r=S.reqs.find(x=>x.id===id);U(r.de).pass=p;r.estado='atendida';logp('Restableció contraseña de '+r.de);closeM();render()}
+function closeR(id){S.reqs.find(x=>x.id===id).estado='atendida';logp('Atendió una solicitud');render()}
+
+/* Borrado total */
+function wipeF(){modal(`<h3>Borrar todos los datos</h3><p>Esta acción es irreversible. Escribe <b>BORRAR</b> para continuar.</p><label>Confirmación<input id="w_c"></label>${pwf()}<div class="acts"><button class="btn gh" onclick="closeM()">Cancelar</button><button class="btn dk" onclick="wipe()">Borrar todo</button></div>`)}
+function wipe(){if($('#w_c').value!=='BORRAR')return toast('Escribe BORRAR');if(!pwok())return;const keep=me,old=S.mats;if(DB)old.forEach(m=>DB.doc('mats/'+m.id).delete().catch(()=>{}));seed();S.users=[keep];me=keep;logp('Borró todos los datos');closeM();view='resumen';render();toast('Datos eliminados')}
+boot();
+</script></body></html>
